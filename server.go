@@ -11,6 +11,7 @@ const (
 	PORT = 8080 // Port use
 );
 
+// Manage Error 
 func manageError(err error, errorType int) {
 	if (errorType == 0) {
 		if (err != nil) {
