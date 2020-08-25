@@ -31,7 +31,8 @@ Open second Terminal.
 - [x] The client and the server communicate via the TCP protocol.
 
 ### Go Competances
-I want to dicover go, and I search a little project for all points below :
+I want to dicover Golang programing language, and for that, what could be better than a discovery project ?
+You can see below the list of points I have addressed in the project so far. 
 
 - [ ] Structure
 - [ ] Methods
