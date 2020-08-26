@@ -3,6 +3,8 @@ package main;
 import (
 	"fmt"
 	"net"
+
+	"pkg/pkg"
 );
 
 // Global Variable
@@ -24,9 +26,12 @@ func manageError(err error, errorType int) {
 	}
 }
 
-func main() {
-	fmt.Println("Start Server...");
 
+func main() {
+	// Setup logs
+	pkg.SetupLogServer("./logs/logServer.txt");
+
+	fmt.Println("Start Server...");
 	// Listen Server
 	ln, err := net.Listen("tcp", fmt.Sprintf("%s:%d", IP, PORT));
 	manageError(err, 0);

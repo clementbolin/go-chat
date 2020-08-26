@@ -1,4 +1,4 @@
-package main;
+package pkg;
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ const (
 );
 
 // Manage Error 
-func manageError(err error, errorType int) {
+func manageErrorClient(err error, errorType int) {
 	if (errorType == 0) {
 		if (err != nil) {
 			panic(err);
@@ -26,21 +26,21 @@ func manageError(err error, errorType int) {
 	}
 }
 
-func main() {
+func Client() {
 	// Connect to server
 	conn, err := net.Dial("tcp", fmt.Sprintf("%s:%d", IP, PORT));
-	manageError(err, 0);
+	manageErrorClient(err, 0);
 	// Infinite loop, where user can send message.
 	for {
 		// User Input
 		reader := bufio.NewReader(os.Stdin);
 		fmt.Print("User : ");
 		input, err := reader.ReadString('\n');
-		manageError(err, 0);
+		manageErrorClient(err, 0);
 		// Sends message to server
 		conn.Write([]byte(input));
 		message, err := bufio.NewReader(conn).ReadString('\n');
-		manageError(err, 0);
+		manageErrorClient(err, 0);
 		// Display server message
 		fmt.Println("Server : ", message);
 	}

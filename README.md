@@ -30,7 +30,7 @@ Open second Terminal.
 - [x] Notify other users that a user has logged in/disconnected.
 - [x] The client and the server communicate via the TCP protocol.
 
-### Go Competances
+### Golang Competances
 I want to dicover Golang programing language, and for that, what could be better than a discovery project ?
 You can see below the list of points I have addressed in the project so far. 
 
@@ -43,7 +43,7 @@ You can see below the list of points I have addressed in the project so far.
 - [x] condition
 - [x] Input user
 - [x] Function
-- [ ] Goroutines
+- [x] Goroutines
 - [ ] Interface
 
 
