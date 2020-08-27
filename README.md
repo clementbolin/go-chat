@@ -20,7 +20,7 @@ Open second Terminal.
 ### Project Subject
 
 - [x] The server accepts several users.
-- [ ] The server has a log file with incoming and outgoing connections.
+- [x] The server has a log file with incoming and outgoing connections.
 - [ ] The user must define a nickname before being able to log in and the - nickname must not exceed 20 characters.
 - [ ] The user cannot take a nickname that has already been used.
 - [x] The user must send the message to the server and the message will be - broadcast to all other users.
@@ -34,8 +34,8 @@ You can see below the list of points I have addressed in the project so far.
 
 - [ ] Structure
 - [ ] Methods
-- [ ] Write in file
-- [ ] Read file
+- [x] Write in file
+- [x] Read file
 - [x] Use net lib
 - [x] loop
 - [x] condition
