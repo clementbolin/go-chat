@@ -23,10 +23,15 @@ func manageErrorClient(err error, errorType int) {
 
 // Choice Pseudo
 func choiceName() string {
-	scan := bufio.NewScanner(os.Stdin);
-	fmt.Print("Choice your pseudo: ");
-	scan.Scan();
-	return (scan.Text())
+	var pseudo string = "";
+	for (len(pseudo) == 0 || len(pseudo) > 20) {
+		scan := bufio.NewScanner(os.Stdin);
+	
+		fmt.Print("Choice your pseudo: ");
+		scan.Scan();
+		pseudo = scan.Text();
+	}
+	return (pseudo)
 }
 
 func Client() {
@@ -35,7 +40,7 @@ func Client() {
 	// Connect to server
 	conn, err := net.Dial("tcp", fmt.Sprintf("%s:%d", IP, PORT));
 	manageErrorClient(err, 0);
-	fmt.Println(pseudo, "connected to the room");
+	fmt.Printf("%s connected to the room\n\n", pseudo);
 	wg.Add(2)
 
 	// Infinite loop, where user can send message.
