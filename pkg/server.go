@@ -27,7 +27,7 @@ func manageError(err error, errorType int) {
 }
 
 func sendClientConnect(client net.Conn, allClient []net.Conn) {
-	var message string = "[INFO] New connected. Welcome " + client.RemoteAddr().String() + "\n";
+	var message string = "\033[1;31m[INFO]\033[1;37m New connected. Welcome " + client.RemoteAddr().String() + "\n";
 	for _, c := range allClient {
 		c.Write([]byte(message))
 	}
