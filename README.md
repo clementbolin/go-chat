@@ -21,7 +21,7 @@ Open second Terminal.
 
 - [x] The server accepts several users.
 - [x] The server has a log file with incoming and outgoing connections.
-- [ ] The user must define a nickname before being able to log in and the - nickname must not exceed 20 characters.
+- [x] The user must define a nickname before being able to log in and the - nickname must not exceed 20 characters.
 - [ ] The user cannot take a nickname that has already been used.
 - [x] The user must send the message to the server and the message will be - broadcast to all other users.
 - [ ] Use the notion of class with structures (one structure for the server - and another one for the client).

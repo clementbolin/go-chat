@@ -26,6 +26,12 @@ func manageError(err error, errorType int) {
 	}
 }
 
+func sendClientConnect(client net.Conn, allClient []net.Conn) {
+	var message string = "[INFO] New connected. Welcome " + client.RemoteAddr().String() + "\n";
+	for _, c := range allClient {
+		c.Write([]byte(message))
+	}
+}
 
 func Server() {
 	SetupLogServer(PATHLOG); // Setup logs server
@@ -42,6 +48,7 @@ func Server() {
 	for {
 		conn, err := ln.Accept();
 		manageError(err, 0);
+		sendClientConnect(conn, clients);
 		clients = append(clients, conn);
 		fmt.Println("Client connected : ", conn.RemoteAddr());
 		// Display Client Info

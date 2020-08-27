@@ -34,7 +34,6 @@ func WriteLogsServer(fd *os.File, content string, user string) {
 	var currentTime = time.Now();
 
 	content = strings.Replace(content, "\n", "", 1);
-	fmt.Println(content);
 	log = fmt.Sprintf("Time: [%s] User: [%s] content: [%s]\n", currentTime.String(), content, user); // Create log mesage
 	fd.WriteString(log); // Write log message in file
 }
