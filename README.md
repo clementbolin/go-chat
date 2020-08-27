@@ -4,8 +4,18 @@
 
     git clone https://github.com/ClementBolin/go-chat.git
     cd go-chat
-    go build server.go
-    go build client.go
+
+##### Setup Environenment (Init go.mod)
+
+    make build
+
+##### Run Server
+
+    make run-server
+
+##### Run Client
+
+    make client
 
 Open second Terminal.
 

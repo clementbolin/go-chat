@@ -1,10 +1,8 @@
-package main;
+package pkg
 
 import (
 	"fmt"
 	"net"
-
-	"pkg/pkg"
 );
 
 // Global Variable
@@ -27,9 +25,9 @@ func manageError(err error, errorType int) {
 }
 
 
-func main() {
+func Server() {
 	// Setup logs
-	pkg.SetupLogServer("./logs/logServer.txt");
+	// pkg.SetupLogServer("./logs/logServer.txt");
 
 	fmt.Println("Start Server...");
 	// Listen Server

@@ -8,10 +8,10 @@ import (
 );
 
 // Global Variable
-const (
-	IP = "127.0.0.01" // localhost adress
-	PORT = 8080 // Port use
-);
+// const (
+// 	IP = "127.0.0.01" // localhost adress
+// 	PORT = 8080 // Port use
+// );
 
 // Manage Error 
 func manageErrorClient(err error, errorType int) {

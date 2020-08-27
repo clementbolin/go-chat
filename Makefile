@@ -27,6 +27,8 @@ PROJECTNAME := $(shell basename "$(PWD)")
 # Use linker flags to provide version/build settings
 LDFLAGS=-ldflags "-X=main.Version=$(VERSION) -X=main.Build=$(BUILD)"
 
+all: help
+
 build:
 	@echo "$(GREEN)   > Building binary ...\n    $(GOFILES)$(WHITE)"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
@@ -45,10 +47,24 @@ setup:
 	@echo "$(RED)    > Setup go.mod ...$(WHITE)"
 	@go mod init pkg
 
-clean-cache-pkg:
+clean-cache-mod:
 	@echo "$(RED)    > Clean $(GOPATH)/pkg/mod ...$(WHITE)"
 	@go clean --modcache
 
-run:
-	@echo "$(GREEN)    > Run Project ...$(WHITE)"
-	@./bin/$(PROJECTNAME)
+run-server:
+	@echo "$(GREEN)    > Run Server ...$(WHITE)"
+	@./bin/$(PROJECTNAME) --server
+
+run-client:
+	@echo "$(GREEN)    > Run Client ...$(WHITE)"
+	@./bin/$(PROJECTNAME) --client
+
+help:
+	@echo "$(RED)Makefile Rules$(WHITE)"
+	@echo "$(CYAN) Choose a command run in $(PROJECTNAME): $(WHITE)"
+	@echo "$(BLUE)   > make setup $(VIOLET)(setup project)$(WHITE)"
+	@echo "$(BLUE)   > make build $(VIOLET)(build project)$(WHITE)"
+	@echo "$(BLUE)   > make clean $(VIOLET)(clean Project)$(WHITE)"
+	@echo "$(BLUE)   > make clean-cache-mod $(VIOLET)(clean cahe in $(GOPATH)/pkg/mod)$(WHITE)"
+	@echo "$(BLUE)   > make run-server"
+	@echo "$(BLUE)   > make run-client$(WHITE)"
