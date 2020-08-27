@@ -5,13 +5,8 @@ import (
 	"net"
 	"bufio"
 	"os"
+	"sync"
 );
-
-// Global Variable
-// const (
-// 	IP = "127.0.0.01" // localhost adress
-// 	PORT = 8080 // Port use
-// );
 
 // Manage Error 
 func manageErrorClient(err error, errorType int) {
@@ -27,21 +22,37 @@ func manageErrorClient(err error, errorType int) {
 }
 
 func Client() {
+	var wg sync.WaitGroup;
+
 	// Connect to server
 	conn, err := net.Dial("tcp", fmt.Sprintf("%s:%d", IP, PORT));
 	manageErrorClient(err, 0);
+	wg.Add(2)
+
 	// Infinite loop, where user can send message.
-	for {
-		// User Input
-		reader := bufio.NewReader(os.Stdin);
-		fmt.Print("User : ");
-		input, err := reader.ReadString('\n');
-		manageErrorClient(err, 0);
-		// Sends message to server
-		conn.Write([]byte(input));
-		message, err := bufio.NewReader(conn).ReadString('\n');
-		manageErrorClient(err, 0);
-		// Display server message
-		fmt.Println("Server : ", message);
-	}
+	go func() {
+		defer wg.Done()
+		for {
+			// User Input
+			reader := bufio.NewReader(os.Stdin);
+			fmt.Print("> ");
+			input, err := reader.ReadString('\n');
+			manageErrorClient(err, 0);
+			// Sends message to server
+			conn.Write([]byte(input))
+		}
+	}()
+
+	// Goroutine for receive message
+	go func() {
+		for {
+	
+			message, err := bufio.NewReader(conn).ReadString('\n');
+			manageErrorClient(err, 0);
+	
+			// Display server message
+			fmt.Println("> Server : ", message);
+		}
+	}();
+	wg.Wait();
 }

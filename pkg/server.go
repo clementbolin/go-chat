@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+	"bufio"
 	"net"
 );
 
@@ -9,6 +10,7 @@ import (
 const (
 	IP = "127.0.0.01" // localhost adress
 	PORT = 8080 // Port use
+	PATHLOG = "./logs/logServer.txt" // Log path
 );
 
 // Manage Error 
@@ -26,25 +28,37 @@ func manageError(err error, errorType int) {
 
 
 func Server() {
-	// Setup logs
-	// pkg.SetupLogServer("./logs/logServer.txt");
-
+	SetupLogServer(PATHLOG); // Setup logs server
+	var fdLog = OpenLogsFile(PATHLOG);
+	defer fdLog.Close();
 	fmt.Println("Start Server...");
+	var clients []net.Conn; // Client Array
+
 	// Listen Server
 	ln, err := net.Listen("tcp", fmt.Sprintf("%s:%d", IP, PORT));
 	manageError(err, 0);
+
 	// Accept Connection
-	conn, err := ln.Accept();
-	manageError(err, 0);
-	// Display Client Info
-	fmt.Println("Client connected : ", conn.RemoteAddr());
 	for {
-		var buffer []byte = make([]byte, 4096); // 4096 is maximun size for message
-		var message string = "";
-		length, err := conn.Read(buffer); // Read Message
-		message = string(buffer[:length]); // Convert message in String
-		manageError(err, 1);
-		fmt.Println("Mesage: ", message);
-		conn.Write([]byte(message + "\n"));
+		conn, err := ln.Accept();
+		manageError(err, 0);
+		clients = append(clients, conn);
+		fmt.Println("Client connected : ", conn.RemoteAddr());
+		// Display Client Info
+
+		go func() {
+			buf := bufio.NewReader(conn);
+			for {
+				name, err := buf.ReadString('\n');
+				if (err != nil) {
+					fmt.Println("Client disconnected.");
+					break;
+				}
+				for _, c := range clients {
+					c.Write([]byte(name))
+				}
+				WriteLogsServer(fdLog, name, conn.RemoteAddr().String());
+			}
+		}()
 	}
 }

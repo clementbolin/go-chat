@@ -9,23 +9,11 @@
 
     make build
 
+Open second Terminal.
+
 ##### Run Server
 
     make run-server
-
-##### Run Client
-
-    make client
-
-Open second Terminal.
-
-### Terminal #1
-
-    ./server
-
-### Terminal #2
-
-    ./client
 
 ## Why this project
 
@@ -41,7 +29,7 @@ Open second Terminal.
 - [x] The client and the server communicate via the TCP protocol.
 
 ### Golang Competances
-I want to dicover Golang programing language, and for that, what could be better than a discovery project ?
+I want to dicover Golang programing language, and for that, what could be better than a discovery  project?
 You can see below the list of points I have addressed in the project so far. 
 
 - [ ] Structure
